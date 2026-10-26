@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khusus Buat Vania ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome & Phosphor Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#FFE5EC',
+                        softRose: '#FFB3C1',
+                        deepRose: '#FF4D6D',
+                        creamBg: '#FFF0F5',
+                        lavenderSoft: '#E8E8E4'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        handwriting: ['"Caveat"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe5ec 50%, #f0e6ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Heart Floating Background Animation */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart-particle {
+            position: absolute;
+            bottom: -20px;
+            color: rgba(255, 77, 109, 0.5);
+            animation: floatUp 7s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFE5EC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB3C1;
+            border-radius: 10px;
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .polaroid-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .polaroid-card:hover {
+            transform: translateY(-8px) rotate(1deg) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(255, 77, 109, 0.25);
+        }
+
+        /* Pulse Heart Button */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 77, 109, 0.8); }
+        }
+        .glow-btn {
+            animation: pulseGlow 2s infinite;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 relative pb-12">
+
+    <!-- Floating Background Hearts -->
+    <div class="heart-bg" id="heartBg"></div>
+
+    <!-- Music Player Toggle Button (Floating Top Right) -->
+    <div class="fixed top-5 right-5 z-50">
+        <button id="musicBtn" onclick="toggleMusic()" class="flex items-center gap-2 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg border border-pink-200 hover:scale-105 transition-all text-sm font-semibold text-pink-600">
+            <i id="musicIcon" class="fa-solid fa-music animate-spin" style="animation-duration: 4s;"></i>
+            <span id="musicText">Putar Lagu 🎵</span>
+        </button>
+        <!-- Audio Source: Rex Orange County - Indecision -->
+        <audio id="bgMusic" loop src="https://files.catbox.moe/u8o0z5.mp3"></audio>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-4xl mx-auto px-4 pt-10 relative z-10 space-y-16">
+
+        <!-- 1. HERO HEADER SECTION -->
+        <section class="text-center space-y-4 pt-8">
+            <div class="inline-block bg-pink-100 text-pink-600 px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold tracking-wide border border-pink-200 shadow-sm animate-bounce">
+                ✨ Ada pesan manis khusus buat Vania ❤️
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 leading-tight">
+                Hai Vania org yg paling cantik, ada kejutan kecil ni hasil gabut hahah ❤️
+            </h1>
+            <p class="text-gray-600 text-base md:text-lg max-w-xl mx-auto font-medium">
+                Sengaja buat web ini khusus buat kamu. Semoga senyum kamu hari ini makin mekar ya! 😊
+            </p>
+        </section>
+
+        <!-- 2. PHOTO GALLERY SECTION (POLAROID STYLE) -->
+        <section class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto px-2">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 leading-snug">
+                    picture org paling cantik, wonderful, wow, kalah indahnya samosir dibuat wkwk 🌸✨
+                </h2>
+                <p class="text-xs md:text-sm text-gray-500 mt-1">Momen & foto cantik yang selalu bikin kangen</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- PHOTO 1: Foto Cewe Kamu (Vania) -->
+                <div class="polaroid-card bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center rotate-[-2deg]">
+                    <div class="w-full h-64 overflow-hidden rounded-lg bg-pink-50 relative">
+                        <img src="vania.jpg.png" 
+                             alt="Foto Vania Cantik" 
+                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                    </div>
+                    <p class="font-handwriting text-2xl text-pink-600 mt-3 font-semibold text-center">
+                        "Vania org paling cantik ✨"
+                    </p>
+                </div>
+
+                <!-- PHOTO 2: Foto Lucu Megang Bunga -->
+                <div class="polaroid-card bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center rotate-[2deg] border-2 border-pink-300">
+                    <div class="w-full h-64 overflow-hidden rounded-lg bg-pink-50 relative">
+                        <img src="giveflower.jpg.jpeg" 
+                             alt="Megang Bunga" 
+                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                        <span class="absolute top-2 right-2 bg-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">Bunga Buat Vania 💐</span>
+                    </div>
+                    <p class="font-handwriting text-2xl text-rose-600 mt-3 font-semibold text-center">
+                        "Yang megang bunga kalah manis! 💐"
+                    </p>
+                </div>
+
+                <!-- PHOTO 3: Foto Momen Kebersamaan / Lucu -->
+                <div class="polaroid-card bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center rotate-[-1deg]">
+                    <div class="w-full h-64 overflow-hidden rounded-lg bg-pink-50 relative">
+                        <img src="vania2.jpg.png" 
+                             alt="Senyum Manis" 
+                             class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                    </div>
+                    <p class="font-handwriting text-2xl text-pink-600 mt-3 font-semibold text-center">
+                        "Senyum yang bikin candu 💖"
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. KATA-KATA BIKIN SALTING (PESAN) -->
+        <section class="glass-card rounded-3xl p-6 md:p-10 text-center space-y-6 shadow-xl border border-pink-100">
+            <div class="max-w-xl mx-auto space-y-2">
+                <span class="text-3xl">💌</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Pesan ❤️</h2>
+                <p class="text-sm text-gray-500">Klik tombol di bawah ini ya buat baca pesan khusus buat kamu!</p>
+            </div>
+
+            <!-- Box Tempat Kata-kata Muncul -->
+            <div id="quoteBox" class="bg-white/90 p-6 md:p-8 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center border border-pink-100 transition-all duration-300">
+                <p id="quoteText" class="text-lg md:text-xl font-medium text-pink-600 italic">
+                    "Klik tombol di bawah buat buka pesannya ✨"
+                </p>
+            </div>
+
+            <button onclick="generateQuote()" class="glow-btn bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-full text-base transition duration-300 transform active:scale-95 shadow-md flex items-center justify-center gap-2 mx-auto">
+                <i class="fa-solid fa-heart"></i>
+                <span>Buka Pesan Spesial ❤️</span>
+            </button>
+        </section>
+
+        <!-- 4. INTERACTIVE QUIZ & RUNAWAY BUTTON -->
+        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-pink-100 text-center space-y-6">
+            <div class="space-y-2">
+                <span class="text-3xl">🥟😋</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Pertanyaan Penting Hari Ini</h2>
+                <p class="text-gray-600 text-sm md:text-base">Jawab jujur ya, ga boleh bohong! 😄</p>
+            </div>
+
+            <div class="bg-pink-50/70 p-6 rounded-2xl max-w-xl mx-auto border border-pink-100">
+                <p class="text-base md:text-lg font-semibold text-gray-800 leading-relaxed">
+                    "ehh kam suka ngga dimsum, soalnya disini ada yg jualan dimsum buat spanduk gini 'KALAU ORANG CANTIK DAPAT DIMSUM FREE!' tapi pas sore-malam berlaku hari ini aja wkwk" 🥟✨
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative min-h-[60px]" id="buttonContainer">
+                <button onclick="handleAccept()" class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg transition duration-200 text-lg hover:scale-105">
+                    Suka Banget / Mau! 🥟❤️
+                </button>
+                
+                <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()" class="w-full sm:w-auto bg-gray-300 text-gray-700 font-bold px-8 py-3.5 rounded-full shadow transition-all duration-200 text-lg sm:absolute">
+                    Enggak 😜
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. FOOTER & TUTORIAL VS CODE / VERCEL -->
+        <footer class="glass-card rounded-2xl p-6 text-xs text-gray-500 space-y-3 border border-pink-100">
+            <div class="flex items-center justify-between border-b border-pink-100 pb-3">
+                <span class="font-semibold text-pink-600">🛠️ Panduan Edit & Deploy ke Vercel:</span>
+                <button onclick="toggleTutorial()" class="text-pink-600 underline text-xs font-semibold hover:text-pink-700">
+                    <span id="tutToggleText">Tampilkan Tutorial 📖</span>
+                </button>
+            </div>
+
+            <div id="tutorialContent" class="hidden space-y-2 leading-relaxed text-gray-600">
+                <p><strong>1. Ganti Foto di VS Code:</strong> Cari tag <code>&lt;img src="..."&gt;</code> di dalam file <code>index.html</code> ini. Ganti link gambar Unsplash dengan link foto Vania / foto kamu sendiri.</p>
+                <p><strong>2. Ganti Lagu:</strong> Link lagu saat ini memakai MP3 <i>Indecision - Rex Orange County</i>.</p>
+                <p><strong>3. Push ke GitHub:</strong> Buat repository baru di GitHub, upload file <code>index.html</code> ini.</p>
+                <p><strong>4. Deploy Gratis di Vercel:</strong> Login ke <strong>Vercel.com</strong> -> Klik "Add New Project" -> Pilih repo tadi -> Klik "Deploy". Kirim link web cantik ini ke Vania! 🎉</p>
+            </div>
+
+            <p class="text-center pt-2 text-gray-400">Dibuat khusus dengan ❤️ untuk bikin Vania senyum seharian.</p>
+        </footer>
+
+    </main>
+
+    <!-- SUCCESS MODAL (AFTER CLICKING YES) -->
+    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center space-y-5 shadow-2xl border-2 border-pink-300 transform transition-all scale-100">
+            <div class="w-20 h-20 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mx-auto text-4xl animate-bounce">
+                🥟🎉
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">GAS KITA BERANGKUT! 🥳</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Asiiik dapet dimsum free karena kamu org paling cantik! Nanti sore/malam aku jemput yaaa 💖🥟
+            </p>
+            <button onclick="closeModal()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-xl shadow-lg transition">
+                Tutup & Chat Aku Sekarang 📲
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. Floating Hearts Animation ---
+        function createHeart() {
+            const heartBg = document.getElementById('heartBg');
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            
+            const icons = ['❤️', '💖', '🌸', '✨', '💕', '🌹', '💗'];
+            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            heartBg.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 7000);
+        }
+        setInterval(createHeart, 350);
+
+        // --- 2. Music Player Logic (Rex Orange County - Indecision) ---
+        let isPlaying = false;
+        const audio = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicText = document.getElementById('musicText');
+        const musicIcon = document.getElementById('musicIcon');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicText.innerText = "Putar Lagu 🎵";
+                musicIcon.classList.remove('animate-spin');
+            } else {
+                audio.play().catch(() => {
+                    alert("Klik di sembarang tempat dulu ya supaya audio bisa diputar!");
+                });
+                musicText.innerText = "Indecision 🎶";
+                musicIcon.classList.add('animate-spin');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // --- 3. Love Notes / Custom Pesan Generator ---
+        const quotes = [
+            "keep spirit for today n selamanya yaaa, jgn pernah nyerah/ngeluh yaa kalau ada masalah cerita aja okee, semangatt terus yaa org yg paling cantikkk sesidikalang ❤️❤️❤️",
+            "Kamu tau ga? Tiap kali dapet notif dari kamu, bawaannya pengen senyum-senyum sendiri 😁❤️",
+            "Hari-hariku belakangan ini terasa lebih cerah, dan alasannya itu kamu Vania ☀️✨",
+            "Jangan capek-capek ya hari ini. Kalau butuh tempat cerita, aku selalu siap dengerin 🎧💗",
+            "Aku bersyukur banget bisa kenal sama kamu Vania. Jangan hilang dari hariku ya 🌸❤️"
+        ];
+
+        let lastIndex = -1;
+        function generateQuote() {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * quotes.length);
+            } while (randomIndex === lastIndex);
+            
+            lastIndex = randomIndex;
+            const quoteText = document.getElementById('quoteText');
+            const quoteBox = document.getElementById('quoteBox');
+            
+            // Fade Out Animation
+            quoteBox.style.opacity = '0';
+            quoteBox.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                quoteText.innerText = `"${quotes[randomIndex]}"`;
+                quoteBox.style.opacity = '1';
+                quoteBox.style.transform = 'scale(1)';
+            }, 200);
+
+            // Trigger burst of heart confetti
+            confetti({
+                particleCount: 30,
+                spread: 70,
+                origin: { y: 0.7 }
+            });
+        }
+
+        // --- 4. Runaway "Enggak" Button Logic ---
+        function moveNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 150) - (window.innerWidth / 2 - 75);
+            const y = Math.random() * (window.innerHeight - 150) - (window.innerHeight / 2 - 75);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${Math.max(20, Math.min(window.innerWidth - 120, Math.abs(x)))}px`;
+            noBtn.style.top = `${Math.max(20, Math.min(window.innerHeight - 80, Math.abs(y)))}px`;
+        }
+
+        // --- 5. Accept Button & Confetti ---
+        function handleAccept() {
+            // Giant Confetti Explosion
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff4d6d', '#ffb3c1', '#ffe5ec']
+                });
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff4d6d', '#ffb3c1', '#ffe5ec']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // --- 6. Toggle Tutorial Content ---
+        function toggleTutorial() {
+            const tut = document.getElementById('tutorialContent');
+            const tutText = document.getElementById('tutToggleText');
+            if (tut.classList.contains('hidden')) {
+                tut.classList.remove('hidden');
+                tutText.innerText = "Sembunyikan Tutorial 📑";
+            } else {
+                tut.classList.add('hidden');
+                tutText.innerText = "Tampilkan Tutorial 📖";
+            }
+        }
+    </script>
+</body>
+</html>
